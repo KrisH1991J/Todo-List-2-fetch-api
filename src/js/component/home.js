@@ -7,6 +7,47 @@ const Home = () => {
 	const apiURL =
 		"https://assets.breatheco.de/apis/fake/todos/user/KrisH1991J";
 
+	let fetchDelete = () => {
+		fetch(apiURL, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(resp => {
+				return resp.json();
+			})
+			.then(data => {
+				console.log(data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	let fetchPost = () => {
+		fetch(apiURL, {
+			method: "POST",
+			body: JSON.stringify([]),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(resp => {
+				return resp.json();
+			})
+			.then(data => {
+				console.log(data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	function refreshPage() {
+		window.location.reload(false);
+	}
+
 	useEffect(() => {
 		fetch(apiURL)
 			.then(resp => {
@@ -18,22 +59,8 @@ const Home = () => {
 			})
 			.catch(error => {
 				console.log(error);
-				fetch(apiURL, {
-					method: "POST",
-					body: JSON.stringify([]),
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(resp => {
-						return resp.json();
-					})
-					.then(data => {
-						console.log(data);
-					})
-					.catch(error => {
-						console.log(error);
-					});
+				fetchPost();
+				refreshPage();
 			});
 	}, []);
 
@@ -85,21 +112,10 @@ const Home = () => {
 				console.log(error);
 			});
 		if (updatedList == 0) {
-			fetch(apiURL, {
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json"
-				}
-			})
-				.then(resp => {
-					return resp.json();
-				})
-				.then(data => {
-					console.log(data);
-				})
-				.catch(error => {
-					console.log(error);
-				});
+			fetchDelete();
+			if (fetchDelete) {
+				refreshPage();
+			}
 		}
 	};
 
