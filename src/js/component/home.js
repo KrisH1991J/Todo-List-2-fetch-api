@@ -17,11 +17,12 @@ const Home = () => {
 			.then(resp => {
 				return resp.json();
 			})
-			.then(data => {
-				console.log(data);
-			})
+			.then(data => {})
 			.catch(error => {
 				console.log(error);
+			})
+			.finally(fin => {
+				refreshPage();
 			});
 	};
 
@@ -36,9 +37,7 @@ const Home = () => {
 			.then(resp => {
 				return resp.json();
 			})
-			.then(data => {
-				console.log(data);
-			})
+			.then(data => {})
 			.catch(error => {
 				console.log(error);
 			});
@@ -55,7 +54,6 @@ const Home = () => {
 			})
 			.then(data => {
 				updateTodos(data);
-				console.log(data);
 			})
 			.catch(error => {
 				console.log(error);
@@ -83,9 +81,7 @@ const Home = () => {
 				.then(resp => {
 					return resp.json();
 				})
-				.then(data => {
-					console.log(data);
-				})
+				.then(data => {})
 				.catch(error => {
 					console.log(error);
 				});
@@ -105,17 +101,12 @@ const Home = () => {
 			.then(resp => {
 				return resp.json();
 			})
-			.then(data => {
-				console.log(data);
-			})
+			.then(data => {})
 			.catch(error => {
 				console.log(error);
 			});
 		if (updatedList == 0) {
 			fetchDelete();
-			if (fetchDelete) {
-				refreshPage();
-			}
 		}
 	};
 
